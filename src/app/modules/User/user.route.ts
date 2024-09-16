@@ -6,12 +6,12 @@ import { userValidations } from "./user.validation";
 
 const router = Router();
 
-router.get("/me", auth("user"), UserControllers.getProfile);
+router.get("/me", auth("user", "admin"), UserControllers.getProfile);
 router.put(
   "/me",
   auth("user"),
   validateRequest(userValidations.updateValidationSchema),
-  UserControllers.UpdateProfile,
+  UserControllers.UpdateProfile
 );
 
 export const UserRoutes = router;

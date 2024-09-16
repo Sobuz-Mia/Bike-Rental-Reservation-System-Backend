@@ -16,7 +16,7 @@ const createUserIntoDB = async (payload: TUser) => {
 };
 const loginUser = async (payload: TUserLogin) => {
   const user = await User.findOne({ email: payload.email }).select(
-    "+password -createdAt -updatedAt",
+    "+password -createdAt -updatedAt"
   );
   // checking is user exist
   if (!user) {
@@ -43,11 +43,11 @@ const loginUser = async (payload: TUserLogin) => {
   const accessToken = jwt.sign(
     jwtPayload,
     config.jwt_access_token_secret as string,
-    { expiresIn: "10d" },
+    { expiresIn: "10d" }
   );
   // const result = await User.create(payload);
   return {
-    accessToken,
+    accessToken: `Bearer ${accessToken}`,
     userData,
   };
 };
